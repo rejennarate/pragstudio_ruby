@@ -17,7 +17,7 @@ describe Player do
   end
 
   it "has a string representation" do
-    expect(@player.to_s).to eq "I'm #{@player.name} and my health is #{@player.health} and a score of #{@player.score}."
+    expect(@player.to_s).to eq "#{@player.name} has a health of #{@player.health} and a score of #{@player.score}."
   end
 
   it "computes a score as the sum of its health and length of name" do
@@ -54,4 +54,17 @@ describe Player do
     end
   end
 
+  context "in a collection of players" do
+    before do
+      @player1 = "whaley", 100
+      @player2 = "catly", 200
+      @player3 = "bro", 300
+
+      @players = [@player1, @player2, @player3]
+    end
+
+    it "is sorted in decreasing order" do
+      expect(@players.sort).to eq [@player3, @player2, @player1]
+    end
+  end
 end
