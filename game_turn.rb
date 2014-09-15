@@ -1,3 +1,7 @@
+require_relative 'player'
+require_relative 'die'
+require_relative 'treasure_trove'
+
 module GameTurn
 
   def self.take_turn player
@@ -13,6 +17,7 @@ module GameTurn
       player.rekt
       puts player
     end
+    random_treasure = TreasureTrove.random
+    puts "#{player.name} found a #{random_treasure.name} worth #{random_treasure.points} points."
   end
-
 end

@@ -1,6 +1,7 @@
 require_relative 'player'
 require_relative 'die'
 require_relative 'game_turn'
+require_relative 'treasure_trove'
 
 class Game
   attr_reader :title
@@ -20,6 +21,12 @@ class Game
       puts player
     end
    
+    treasures = TreasureTrove::TREASURES
+    puts "There are #{treasures.size} treasures:"
+    treasures.each do |treasure|
+      puts "#{treasure.name} is worth #{treasure.points} points"
+    end
+
    1.upto rounds do |round|
       puts "Round #{round}"
       @players.each do |player|
@@ -36,10 +43,13 @@ class Game
   def print_stats
     strong_players, wimpy_players = @players.partition { |player| player.strong? }
     puts "\n#{@title} statistics:"
+
     puts "\n#{strong_players.length} strong players:"
     strong_players.each { |player| print_name_and_health player }
+
     puts "\n#{wimpy_players.length} wimpy players:"
     wimpy_players.each { |player| print_name_and_health player }
+
     puts @players.sort 
 
     #formatting
