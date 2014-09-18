@@ -52,12 +52,15 @@ class Game
 
     puts @players.sort 
 
+    @players.each do |player|
+      puts "\n#{player.name}'s points:\n#{player.points} total points"
+    end
+
     #formatting
     puts "\n#{@title} high scores:"
     @players.sort.each do |player|
       formatted_name = player.name.ljust(20, '.')
       puts "#{formatted_name} #{player.score}"
     end
-
   end
 end

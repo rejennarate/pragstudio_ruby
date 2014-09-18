@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'treasure_trove'
 
 describe Player do
 
@@ -17,11 +18,14 @@ describe Player do
   end
 
   it "has a string representation" do
-    expect(@player.to_s).to eq "#{@player.name} has a health of #{@player.health} and a score of #{@player.score}."
+    expect(@player.to_s).to eq "#{@player.name} has a health of #{@player.health}, #{@player.points} points, and a score of #{@player.score}."
   end
 
-  it "computes a score as the sum of its health and length of name" do
-    expect(@player.score).to eq @initial_health + 6
+  it "computes a score as the sum of its health and points" do
+    @player.found_treasure(Treasure.new(:triforks, 50))
+    @player.found_treasure(Treasure.new(:triforks, 50))
+
+    expect(@player.score).to eq 250  
   end
 
   it "increases health by 15 when mek'd" do
@@ -67,4 +71,21 @@ describe Player do
       expect(@players.sort).to eq [@player3, @player2, @player1]
     end
   end
+
+  it "computes points as the sum of all treasure points" do
+    expect(@player.points).to eq 0
+
+    @player.found_treasure(Treasure.new(:triforks, 50))
+
+    expect(@player.points).to eq 50
+
+    @player.found_treasure(Treasure.new(:tango, 400))
+
+    expect(@player.points).to eq 450
+
+    @player.found_treasure(Treasure.new(:triforks, 50))
+
+    expect(@player.points).to eq 500
+  end
+
 end

@@ -17,7 +17,9 @@ module GameTurn
       player.rekt
       puts player
     end
+
     random_treasure = TreasureTrove.random
-    puts "#{player.name} found a #{random_treasure.name} worth #{random_treasure.points} points."
+    player.found_treasure random_treasure
+    #puts "#{player.name} found a #{random_treasure.name} worth #{random_treasure.points} points."
   end
 end

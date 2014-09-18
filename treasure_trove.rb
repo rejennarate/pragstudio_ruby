@@ -3,7 +3,7 @@ Treasure = Struct.new :name, :points
 module TreasureTrove
   TREASURES = [
     Treasure.new(:tiny_hamburger, 5),
-    Treasure.new(:sheepstick, 25),
+    Treasure.new(:woon_stone, 25),
     Treasure.new(:triforks, 50),
     Treasure.new(:blonk_digger, 100),
     Treasure.new(:bacon, 200),
@@ -13,5 +13,5 @@ module TreasureTrove
   def self.random
     TREASURES.sample
   end
-  
+
 end

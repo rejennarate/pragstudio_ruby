@@ -26,8 +26,8 @@ describe TreasureTrove do
     expect(TreasureTrove::TREASURES[0]).to eq Treasure.new(:tiny_hamburger, 5)
   end
 
-  it "has a sheepstick worth 25 points" do 
-    expect(TreasureTrove::TREASURES[1]).to eq Treasure.new(:sheepstick, 25)
+  it "has a woon_stone worth 25 points" do 
+    expect(TreasureTrove::TREASURES[1]).to eq Treasure.new(:woon_stone, 25)
   end
 
   it "has a triforks worth 50 points" do 
