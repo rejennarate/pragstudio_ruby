@@ -88,4 +88,25 @@ describe Player do
     expect(@player.points).to eq 500
   end
 
+  it "yields each found treasure and its total points" do
+    @player.found_treasure(Treasure.new(:tango, 400))
+    @player.found_treasure(Treasure.new(:tango, 400))
+    @player.found_treasure(Treasure.new(:triforks, 50))
+    @player.found_treasure(Treasure.new(:woon_stone, 25))
+    @player.found_treasure(Treasure.new(:woon_stone, 25))
+    @player.found_treasure(Treasure.new(:woon_stone, 25))
+    @player.found_treasure(Treasure.new(:woon_stone, 25))
+
+    yielded = []
+    @player.each_found_treasure do |treasure|
+      yielded << treasure
+    end
+
+    expect(yielded).to eq [
+      Treasure.new(:tango, 800),
+      Treasure.new(:triforks, 50),
+      Treasure.new(:woon_stone, 100)
+    ]
+  end
+
 end

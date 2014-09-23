@@ -53,7 +53,11 @@ class Game
     puts @players.sort 
 
     @players.each do |player|
-      puts "\n#{player.name}'s points:\n#{player.points} total points"
+      puts "\n#{player.name}'s points:"
+      player.each_found_treasure do |treasure|
+        puts "#{treasure.points} #{treasure.name} points"
+      end
+      puts "#{player.points} total points"
     end
 
     #formatting

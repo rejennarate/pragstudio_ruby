@@ -50,6 +50,12 @@ class Player
     @found_treasures.values.reduce(0, :+)
   end
 
+  def each_found_treasure
+    @found_treasures.each do |name, points|
+      yield Treasure.new(name, points)
+    end
+  end
+
 end
 
 if __FILE__ == $0 # this line runs the code only if current file is player.rb (aka $0)
