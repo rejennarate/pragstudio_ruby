@@ -11,6 +11,23 @@ class Game
     @players = []
   end
 
+  def load_players from_file
+    File.readlines(from_file).each do |line|
+      name, health = line.split(",")
+      player = Player.new name, Integer(health)
+      add_player player
+    end
+  end
+
+  def save_high_scores to_file="high_scores.txt"
+    File.open to_file, "w" do |file|
+      file.puts "#{@title} high scores:"
+       @players.sort.each do |player|
+        file.puts high_score_entry(player)
+      end
+    end
+  end
+
   def add_player new_player
     @players <<  new_player
   end
@@ -63,8 +80,12 @@ class Game
     #formatting
     puts "\n#{@title} high scores:"
     @players.sort.each do |player|
-      formatted_name = player.name.ljust(20, '.')
-      puts "#{formatted_name} #{player.score}"
+      puts high_score_entry(player)
     end
+  end
+
+  def high_score_entry player
+    formatted_name = player.name.ljust(20, '.')
+    "#{formatted_name} #{player.score}"
   end
 end

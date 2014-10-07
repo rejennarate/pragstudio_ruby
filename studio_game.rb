@@ -1,17 +1,23 @@
 require_relative 'player'
 require_relative 'game'
 
-player1 = Player.new "whaley"
-player2 = Player.new "catly", 60
-player3 = Player.new "bro", 125
-
 buttfaces = Game.new "buttfaces"
-buttfaces.add_player player1
-buttfaces.add_player player2
-buttfaces.add_player player3
-buttfaces.play(3)
-buttfaces.print_stats
+buttfaces.load_players(ARGV.shift || "players.csv")
 
+loop do
+  puts "How many game rounds? ('quit' to exit)"
+  game_rounds = gets.chomp.downcase
+  case game_rounds
+  when /^\d+$/
+    buttfaces.play(game_rounds.to_i)
+  when "quit", "exit"
+    buttfaces.print_stats
+    break
+  else
+    puts "Please enter a number or 'quit'"
+  end
+end
 
+buttfaces.save_high_scores
 
 # is intialize method required for classes?
