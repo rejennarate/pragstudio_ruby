@@ -1,6 +1,8 @@
 require_relative 'treasure_trove'
+require_relative 'playable'
 
 class Player
+  include Playable 
   attr_accessor :name
   attr_reader :health
 
@@ -18,26 +20,8 @@ class Player
     "#{@name} has a health of #{@health}, #{points} points, and a score of #{score}."
   end
 
-  def rekt
-    @health -= 10
-    puts "#{@name} got rekt!"
-  end
-
-  def mek
-    @health += 15
-    puts "#{@name} got mek'd!"
-  end
-
   def score
     @health + points
-  end
-
-  def strong?
-    if @health > 100
-      true
-    elsif @health <= 100
-      false
-    end
   end
 
   def found_treasure treasure

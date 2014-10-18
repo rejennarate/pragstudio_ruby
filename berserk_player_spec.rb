@@ -10,13 +10,13 @@ describe BerserkPlayer do
   it "does not go berserk when mek'd up to 5 times" do
     1.upto(5) {@player.mek} 
 
-    @player.berserk?.should be_falsey
+    expect(@player.berserk?).to be_falsey
   end
 
   it "goes berserk when mek'd more than 5 times" do 
     1.upto(6) {@player.mek}
 
-    @player.berserk?.should be_truthy
+    expect(@player.berserk?).to be_truthy
   end
 
   it "gets mek'd instead of rekt when it's gone berserk" do
