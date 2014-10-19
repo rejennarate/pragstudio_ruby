@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/studio_game/game'
+require_relative '../lib/studio_game/clumsy_player'
+require_relative '../lib/studio_game/berserk_player'
+
+buttfaces = StudioGame::Game.new "buttfaces"
+default_player_file = File.join(File.dirname(__FILE__), 'players.csv')
+buttfaces.load_players(ARGV.shift || default_player_file)
+klutz = StudioGame::ClumsyPlayer.new("klutz", 105)
+buttfaces.add_player klutz
+berserker = StudioGame::BerserkPlayer.new("berserker", 50)
+buttfaces.add_player berserker
+
+loop do
+  puts "How many game rounds? ('quit' to exit)"
+  game_rounds = gets.chomp.downcase
+  case game_rounds
+  when /^\d+$/
+    buttfaces.play(game_rounds.to_i)
+  when "quit", "exit"
+    buttfaces.print_stats
+    break
+  else
+    puts "Please enter a number or 'quit'"
+  end
+end
+
+buttfaces.save_high_scores
+
+# is intialize method required for classes?
